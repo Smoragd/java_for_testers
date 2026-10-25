@@ -1,16 +1,28 @@
 package ru.smoragd.geometry.figures;
 
 public class Square {
-    public static void printSquareArea(double c){
-        String text = String.format("Площадь квадрата со стороной %f = %f", c, calcSquareArea(c));
+
+    private double c;
+
+    public Square(double c) {
+        this.c = c;
+    }
+
+    public static void printSquareArea(Square s){
+        String text = String.format("Площадь квадрата со стороной %f = %f", s.c, s.calcSquareArea());
         System.out.println(text);
     }
 
-    public static double calcSquareArea(double squareSide) {
-        return squareSide * squareSide;
+    public static void printSquarePerimeter(Square ss){
+        String text = String.format("Периметр квадрата со стороной %f = %f", ss.c, ss.calcSquarePerimeter());
+        System.out.println(text);
     }
 
-    public static double calcSquarePerimeter(double squareSide) {
-        return squareSide * 4;
+    public double calcSquareArea() {
+        return this.c*this.c;
+    }
+
+    public double calcSquarePerimeter() {
+        return this.c*4;
     }
 }

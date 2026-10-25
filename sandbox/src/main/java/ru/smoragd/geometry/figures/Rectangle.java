@@ -1,6 +1,9 @@
 package ru.smoragd.geometry.figures;
 
 public class Rectangle {
+
+    //в Rectangle - написание кода без объектов, в Square - через объекты
+
     public static void printRectangleArea(double a, double b) {
         String text = String.format("Площадь прямоугольника со сторонами %f и %f = %f", a, b, calcRectangleArea(a, b));
         System.out.println(text);

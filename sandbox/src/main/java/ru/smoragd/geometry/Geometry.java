@@ -5,8 +5,11 @@ import ru.smoragd.geometry.figures.Square;
 
 public class Geometry {
     public static void main(String[] args) {
-        Square.printSquareArea(6.0);
-        Square.printSquareArea(5.0);
+        Square.printSquareArea(new Square(6.0));
+        Square.printSquareArea(new Square (5.0));
+
+        Square.printSquarePerimeter(new Square(2.5));
+        Square.printSquarePerimeter(new Square (25.0));
 
         Rectangle.printRectangleArea(3.0, 5.0);
         Rectangle.printRectangleArea(7.2, 9.1);
