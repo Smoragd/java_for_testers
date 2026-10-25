@@ -11,8 +11,8 @@ public class Geometry {
         Square.printSquarePerimeter(new Square(2.5));
         Square.printSquarePerimeter(new Square (25.0));
 
-        Rectangle.printRectangleArea(3.0, 5.0);
-        Rectangle.printRectangleArea(7.2, 9.1);
+        Rectangle.printRectangleArea(new Rectangle(3.0, 5.0));
+        Rectangle.printRectangleArea(new Rectangle(7.2, 9.1));
     }
 
 }

@@ -1,15 +1,14 @@
 package ru.smoragd.geometry.figures;
 
-public class Rectangle {
+public record Rectangle (double a, double b) {
+    //при использовании Record описание структуры(свойств) и конструктор можно не указывать - вся информация уже есть в описании класса
 
-    //в Rectangle - написание кода без объектов, в Square - через объекты
-
-    public static void printRectangleArea(double a, double b) {
-        String text = String.format("Площадь прямоугольника со сторонами %f и %f = %f", a, b, calcRectangleArea(a, b));
+    public static void printRectangleArea(Rectangle s) {
+        String text = String.format("Площадь прямоугольника со сторонами %f и %f = %f", s.a, s.b, s.calcRectangleArea());
         System.out.println(text);
     }
 
-    public static double calcRectangleArea(double rectangleSide1, double rectangleSide2) {
-        return rectangleSide1 * rectangleSide2;
+    public double calcRectangleArea() {
+        return this.a*this.b;
     }
 }
