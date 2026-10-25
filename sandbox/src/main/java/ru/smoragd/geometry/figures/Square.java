@@ -6,7 +6,11 @@ public class Square {
         System.out.println(text);
     }
 
-    private static double calcSquareArea(double squareSide) {
+    public static double calcSquareArea(double squareSide) {
         return squareSide * squareSide;
+    }
+
+    public static double calcSquarePerimeter(double squareSide) {
+        return squareSide * 4;
     }
 }

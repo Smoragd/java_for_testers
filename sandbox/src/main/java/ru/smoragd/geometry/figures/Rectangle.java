@@ -6,7 +6,7 @@ public class Rectangle {
         System.out.println(text);
     }
 
-    private static double calcRectangleArea(double rectangleSide1, double rectangleSide2) {
+    public static double calcRectangleArea(double rectangleSide1, double rectangleSide2) {
         return rectangleSide1 * rectangleSide2;
     }
 }
