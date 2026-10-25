@@ -13,8 +13,8 @@ public class Square {
         System.out.println(text);
     }
 
-    public static void printSquarePerimeter(Square ss){
-        String text = String.format("Периметр квадрата со стороной %f = %f", ss.c, ss.calcSquarePerimeter());
+    public static void printSquarePerimeter(Square s){
+        String text = String.format("Периметр квадрата со стороной %f = %f", s.c, s.calcSquarePerimeter());
         System.out.println(text);
     }
 

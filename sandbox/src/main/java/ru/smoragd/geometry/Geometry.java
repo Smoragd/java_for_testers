@@ -2,6 +2,7 @@ package ru.smoragd.geometry;
 
 import ru.smoragd.geometry.figures.Rectangle;
 import ru.smoragd.geometry.figures.Square;
+import ru.smoragd.geometry.figures.Triangle;
 
 public class Geometry {
     public static void main(String[] args) {
@@ -13,6 +14,12 @@ public class Geometry {
 
         Rectangle.printRectangleArea(new Rectangle(3.0, 5.0));
         Rectangle.printRectangleArea(new Rectangle(7.2, 9.1));
+
+        Triangle.printTriangleArea(new Triangle(6.0,6.0,6.0));
+        Triangle.printTriangleArea(new Triangle(5.0,4.0,3.0));
+
+        Triangle.printTrianglePerimeter(new Triangle(6.0,6.0,6.0));
+        Triangle.printTrianglePerimeter(new Triangle(5.0,4.0,3.0));
     }
 
 }
