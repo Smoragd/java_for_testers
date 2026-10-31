@@ -28,4 +28,19 @@ public class Square {
     public double calcSquarePerimeter() {
         return this.c*4;
     }
+
+    //необходимо добавить, чтобы в тестах работал assertEquals, тк Square - обычный class, а не record
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Square square = (Square) o;
+        return Double.compare(square.c, c) == 0;
+    }
+
+    //необходимо добавить, чтобы в тестах работал assertEquals, тк Square - обычный class, а не record
+    @Override
+    public int hashCode() {
+        return Double.hashCode(c);
+    }
 }

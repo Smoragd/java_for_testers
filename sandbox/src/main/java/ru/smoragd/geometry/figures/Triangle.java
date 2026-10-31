@@ -1,5 +1,7 @@
 package ru.smoragd.geometry.figures;
 
+import java.util.Objects;
+
 public class Triangle {
 
     private double side1;
@@ -37,5 +39,33 @@ public class Triangle {
 
     public double calcTrianglePerimeter() {
         return this.side1+this.side2+this.side3;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return
+                (eq(this.side1, triangle.side1) && eq(this.side2, triangle.side2) && eq(this.side3, triangle.side3))
+                || (eq(this.side1, triangle.side1) && eq(this.side2, triangle.side3) && eq(this.side3, triangle.side2))
+                || (eq(this.side1, triangle.side2) && eq(this.side2, triangle.side1) && eq(this.side3, triangle.side3))
+                || (eq(this.side1, triangle.side2) && eq(this.side2, triangle.side3) && eq(this.side3, triangle.side1))
+                || (eq(this.side1, triangle.side3) && eq(this.side2, triangle.side1) && eq(this.side3, triangle.side2))
+                || (eq(this.side1, triangle.side3) && eq(this.side2, triangle.side2) && eq(this.side3, triangle.side1));
+    }
+    private static boolean eq(double x, double y) {
+        return Double.compare(x, y) == 0;
+    }
+/*
+(a, b, c)
+(a, c, b)
+(b, a, c)
+(b, c, a)
+(c, a, b)
+(c, b, a)
+*/
+    @Override
+    public int hashCode() {
+        return 1;
     }
 }
