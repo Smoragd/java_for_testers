@@ -5,10 +5,10 @@ public class Square {
     private double c;
 
     public Square(double c) {
-        this.c = c;
         if (c<0){
             throw new IllegalArgumentException("Square side should be non-negative");
         }
+        this.c = c;
     }
 
     public static void printSquareArea(Square s){

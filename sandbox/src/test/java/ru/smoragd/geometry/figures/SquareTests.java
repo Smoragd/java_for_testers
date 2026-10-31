@@ -31,6 +31,8 @@ public class SquareTests {
             Assertions.fail();
         } catch(IllegalArgumentException exception) {
             //OK
+            Assertions.assertEquals("Square side should be non-negative", exception.getMessage());
+            System.out.println("Выполняется: " + exception.getMessage());
         }
     }
 }

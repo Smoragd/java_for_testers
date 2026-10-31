@@ -19,6 +19,8 @@ public class RectangleTests {
             Assertions.fail();
         } catch(IllegalArgumentException exception) {
             //OK
+            Assertions.assertEquals("Rectangle side should be non-negative", exception.getMessage());
+            System.out.println("Выполняется: " + exception.getMessage());
         }
     }
 }
