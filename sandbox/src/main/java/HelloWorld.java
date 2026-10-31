@@ -4,7 +4,7 @@ public class HelloWorld {
     public static void main(String[] args) {
         //механизм перехвата исключений:
         try {
-            var z = calculateZ();
+            int z = calculateZ();
             System.out.println(z);
             System.out.println("Hello, World!");
         } catch (ArithmeticException exception){
@@ -20,14 +20,14 @@ public class HelloWorld {
     }
 
     private static int calculateZ() {
-        var x = 1;
-        var y = 0;
-        var z = devide(x, y);
+        int x = 3;
+        int y = 0;
+        int z = devide(x, y);
         return z;
     }
 
     private static int devide(int x, int y) {
-        var z = x / y;
+        int z = x / y;
         return z;
     }
 }
