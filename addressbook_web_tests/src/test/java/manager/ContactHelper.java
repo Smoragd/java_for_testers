@@ -2,6 +2,7 @@ package manager;
 
 import model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class ContactHelper extends HelperBase {
 
@@ -48,14 +49,40 @@ public class ContactHelper extends HelperBase {
         type(By.name("email2"), contact.email2());
         type(By.name("email3"), contact.email3());
         type(By.name("homepage"), contact.homepage());
+        selectDateAndMonth(By.name("bday"), contact.bday());
+        selectDateAndMonth(By.name("bmonth"), contact.bmonth());
+        type(By.name("byear"), contact.byear());
+        selectDateAndMonth(By.name("aday"), contact.aday());
+        selectDateAndMonth(By.name("amonth"), contact.amonth());
+        type(By.name("ayear"), contact.ayear());
         selectGroup(By.name("new_group"), GROUP_FOR_CONTACT_CREATION);
+
     }
-
-
 
     public void openMainPage() {
         if (!manager.isElementPresent(By.linkText("home"))) {
             click(By.linkText("home"));
         }
+    }
+
+    private void addPhoto(By locator, String photoLink) {
+        if (photoLink != null && !photoLink.isEmpty()) {
+            manager.driver.findElement(locator).sendKeys(photoLink);
+        }
+    }
+
+    protected void selectGroup(By locator, String groupName) {
+        WebElement select = manager.driver.findElement(locator);
+        select.click();
+        select.findElement(By.xpath(".//option[. = '" + groupName + "']")).click();
+    }
+
+    protected void selectDateAndMonth(By selectLocator, String value) {
+        if (value == null || value.isEmpty()) {
+            return;   // пустое значение — ничего не выбираем
+        }
+        WebElement select = manager.driver.findElement(selectLocator);
+        select.click();
+        select.findElement(By.xpath(".//option[. = '" + value + "']")).click();
     }
 }

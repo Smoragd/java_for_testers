@@ -1,6 +1,7 @@
 package tests;
 
 import manager.ApplicationManager;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 public class TestBase {
@@ -8,8 +9,8 @@ public class TestBase {
     protected static ApplicationManager app;
 
     //@BeforeEach + @AfterEach - это фикстура
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         if (app == null){
             app = new ApplicationManager();
         }
