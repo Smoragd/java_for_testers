@@ -1,6 +1,7 @@
 package manager;
 
 import model.ContactData;
+import model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -23,6 +24,12 @@ public class ContactHelper extends HelperBase {
 
     private void initContactCreation() {
         click(By.linkText("add new"));
+    }
+
+    public void openMainPage() {
+        if (!manager.isElementPresent(By.linkText("home"))) {
+            click(By.linkText("home"));
+        }
     }
 
     private void returnToMainPage() {
@@ -59,12 +66,6 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void openMainPage() {
-        if (!manager.isElementPresent(By.linkText("home"))) {
-            click(By.linkText("home"));
-        }
-    }
-
     private void addPhoto(By locator, String photoLink) {
         if (photoLink != null && !photoLink.isEmpty()) {
             manager.driver.findElement(locator).sendKeys(photoLink);
@@ -85,4 +86,26 @@ public class ContactHelper extends HelperBase {
         select.click();
         select.findElement(By.xpath(".//option[. = '" + value + "']")).click();
     }
+
+    public void removeContact() {
+        openMainPage();
+        selectContact();
+        removeSelectedContact();
+        returnToMainPage();
+    }
+
+    public boolean isContactPresent() {
+        openMainPage();
+        return manager.isElementPresent(By.name("selected[]"));
+    }
+
+    private void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    private void removeSelectedContact() {
+        click(By.name("delete"));
+    }
+
+
 }
