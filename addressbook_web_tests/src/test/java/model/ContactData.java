@@ -4,6 +4,7 @@ public record ContactData(String firstname,
                           String middlename,
                           String lastname,
                           String nickname,
+                          String photo,
                           String title,
                           String company,
                           String address,
@@ -17,20 +18,21 @@ public record ContactData(String firstname,
                           String bday) {
 
     public ContactData() {
-        this("", "", "", "", "", "",
+        this("", "", "", "", "", "","",
                 "", "", "", "", "", "", "", "", "");
     }
 
     public ContactData withFirstname(String firstname) {
-        return new ContactData(firstname, this.middlename, this.lastname, this.nickname, this.title, this.company,
+        return new ContactData(firstname, this.middlename, this.lastname, this.nickname, this.photo, this.title, this.company,
                 this.address, this.homePhone, this.mobilePhone, this.workPhone, this.email, this.email2, this.email3, this.homepage,
                 this.bday);
     }
 
-    public ContactData noPhotoNoDatesNoGroup(String firstname,
+    public ContactData noDatesNoGroup(String firstname,
                                              String middlename,
                                              String lastname,
                                              String nickname,
+                                             String photo,
                                              String title,
                                              String company,
                                              String address,
@@ -41,7 +43,7 @@ public record ContactData(String firstname,
                                              String email2,
                                              String email3,
                                              String homepage) {
-        return new ContactData(firstname, middlename, lastname, nickname, title, company,
+        return new ContactData(firstname, middlename, lastname, nickname, photo, title, company,
                 address, homePhone, mobilePhone, workPhone, email, email2, email3, homepage, this.bday);
     }
 

@@ -9,6 +9,8 @@ public class ContactHelper extends HelperBase {
         super(manager);
     }
 
+    public static final String PHOTO_LINK = "C:\\Users\\Admin\\Downloads\\Kitten.jpg";
+
     public void createContact(ContactData contact) {
         openMainPage();
         initContactCreation();
@@ -34,6 +36,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("middlename"), contact.middlename());
         type(By.name("lastname"), contact.lastname());
         type(By.name("nickname"), contact.nickname());
+        addPhoto(By.name("photo"), contact.photo());
         type(By.name("title"), contact.title());
         type(By.name("company"), contact.company());
         type(By.name("address"), contact.address());

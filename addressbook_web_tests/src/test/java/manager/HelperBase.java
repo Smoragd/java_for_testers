@@ -18,4 +18,8 @@ public class HelperBase {
         manager.driver.findElement(locator).clear();
         manager.driver.findElement(locator).sendKeys(text);
     }
+
+    protected void addPhoto(By locator, String text) {
+        manager.driver.findElement(locator).sendKeys(text);
+    }
 }

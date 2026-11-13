@@ -5,54 +5,30 @@ import model.GroupData;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
+import static manager.ContactHelper.PHOTO_LINK;
+
 public class ContactCreationTests extends TestBase {
 
     @Test
     public void canCreateContact() {
         app.contacts().createContact(new ContactData("firstname", "middlename", "lastname",
-                "nickname", "title", "company", "address", "homePhone",
+                "nickname", PHOTO_LINK,"title", "company", "address", "homePhone",
                 "mobilePhone", "workPhone", "email", "email2", "email3", "",
                 "bday"));
     }
 
     @Test
-    public void canCreateContactNoPhotoNoDatesNoGroup() {
-        app.contacts().createContact(new ContactData().noPhotoNoDatesNoGroup("firstname", "middlename", "lastname",
-                "nickname", "title", "company", "address", "homePhone",
+    public void canCreateContactNoDatesNoGroup() {
+        app.contacts().createContact(new ContactData().noDatesNoGroup("firstname", "middlename", "lastname",
+                "nickname", PHOTO_LINK,"title", "company", "address", "homePhone",
                 "mobilePhone", "workPhone", "email", "email2", "email3", "homepage.ru"));
     }
 
 
-        /*driver.findElement(By.name("firstname")).click();
-        driver.findElement(By.name("firstname")).sendKeys("name");
-        driver.findElement(By.name("middlename")).click();
-        driver.findElement(By.name("middlename")).sendKeys("middle");
-        driver.findElement(By.name("lastname")).click();
-        driver.findElement(By.name("lastname")).sendKeys("last");
-        driver.findElement(By.name("nickname")).click();
-        driver.findElement(By.name("nickname")).sendKeys("nick");
+        /*
         driver.findElement(By.name("photo")).click();
         driver.findElement(By.name("photo")).sendKeys("C:\\fakepath\\ce15417f45a08594ee29f70ded9e022a.jpg");
-        driver.findElement(By.name("title")).click();
-        driver.findElement(By.name("title")).sendKeys("title");
-        driver.findElement(By.name("company")).click();
-        driver.findElement(By.name("company")).sendKeys("company");
-        driver.findElement(By.name("address")).click();
-        driver.findElement(By.name("address")).sendKeys("address");
-        driver.findElement(By.name("home")).click();
-        driver.findElement(By.name("home")).sendKeys("111");
-        driver.findElement(By.name("mobile")).click();
-        driver.findElement(By.name("mobile")).sendKeys("222");
-        driver.findElement(By.name("work")).click();
-        driver.findElement(By.name("work")).sendKeys("333");
-        driver.findElement(By.name("email")).click();
-        driver.findElement(By.name("email")).sendKeys("1@ya.ru");
-        driver.findElement(By.name("email2")).click();
-        driver.findElement(By.name("email2")).sendKeys("1@gmail.com");
-        driver.findElement(By.name("email3")).click();
-        driver.findElement(By.name("email3")).sendKeys("1@mail.ru");
-        driver.findElement(By.name("homepage")).click();
-        driver.findElement(By.name("homepage")).sendKeys("homepage.ru");
+        C:\Users\Admin\Downloads\Kitten.jpg
         driver.findElement(By.name("bday")).click();
         {
             WebElement dropdown = driver.findElement(By.name("bday"));
