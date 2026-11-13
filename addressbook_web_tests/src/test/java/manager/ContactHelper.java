@@ -2,7 +2,9 @@ package manager;
 
 import model.ContactData;
 import model.GroupData;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 
 public class ContactHelper extends HelperBase {
@@ -91,6 +93,7 @@ public class ContactHelper extends HelperBase {
         openMainPage();
         selectContact();
         removeSelectedContact();
+        //manager.driver.switchTo().alert().accept(); - диалоговое окно (alert) при удалении контакта не появляется
         returnToMainPage();
     }
 

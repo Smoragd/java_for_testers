@@ -11,7 +11,6 @@ public class GroupRemovalTests extends TestBase {
             app.groups().createGroup(new GroupData("test group", "test group", "test group"));
         }
         app.groups().removeGroup();
-
     }
 
 }
