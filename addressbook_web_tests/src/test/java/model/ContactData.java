@@ -28,21 +28,21 @@ public record ContactData(String firstname,
                 this.bday);
     }
 
-    public ContactData noDatesNoGroup(String firstname,
-                                             String middlename,
-                                             String lastname,
-                                             String nickname,
-                                             String photo,
-                                             String title,
-                                             String company,
-                                             String address,
-                                             String homePhone,
-                                             String mobilePhone,
-                                             String workPhone,
-                                             String email,
-                                             String email2,
-                                             String email3,
-                                             String homepage) {
+    public ContactData noDates(String firstname,
+                               String middlename,
+                               String lastname,
+                               String nickname,
+                               String photo,
+                               String title,
+                               String company,
+                               String address,
+                               String homePhone,
+                               String mobilePhone,
+                               String workPhone,
+                               String email,
+                               String email2,
+                               String email3,
+                               String homepage) {
         return new ContactData(firstname, middlename, lastname, nickname, photo, title, company,
                 address, homePhone, mobilePhone, workPhone, email, email2, email3, homepage, this.bday);
     }

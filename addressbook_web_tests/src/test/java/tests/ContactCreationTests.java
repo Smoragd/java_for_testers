@@ -1,9 +1,9 @@
 package tests;
 
+import manager.ContactHelper;
 import model.ContactData;
 import model.GroupData;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 
 import static manager.ContactHelper.PHOTO_LINK;
 
@@ -11,6 +11,7 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void canCreateContact() {
+        app.groups().createGroup(new GroupData(ContactHelper.GROUP_FOR_CONTACT_CREATION, "header", "footer"));
         app.contacts().createContact(new ContactData("firstname", "middlename", "lastname",
                 "nickname", PHOTO_LINK,"title", "company", "address", "homePhone",
                 "mobilePhone", "workPhone", "email", "email2", "email3", "",
@@ -19,16 +20,15 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void canCreateContactNoDatesNoGroup() {
-        app.contacts().createContact(new ContactData().noDatesNoGroup("firstname", "middlename", "lastname",
+        app.groups().createGroup(new GroupData(ContactHelper.GROUP_FOR_CONTACT_CREATION, "header", "footer"));
+        app.contacts().createContact(new ContactData().noDates("firstname", "middlename", "lastname",
                 "nickname", PHOTO_LINK,"title", "company", "address", "homePhone",
                 "mobilePhone", "workPhone", "email", "email2", "email3", "homepage.ru"));
     }
 
 
         /*
-        driver.findElement(By.name("photo")).click();
-        driver.findElement(By.name("photo")).sendKeys("C:\\fakepath\\ce15417f45a08594ee29f70ded9e022a.jpg");
-        C:\Users\Admin\Downloads\Kitten.jpg
+
         driver.findElement(By.name("bday")).click();
         {
             WebElement dropdown = driver.findElement(By.name("bday"));

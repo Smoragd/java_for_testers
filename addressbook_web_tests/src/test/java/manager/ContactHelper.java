@@ -10,6 +10,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public static final String PHOTO_LINK = "C:\\Users\\Admin\\Downloads\\Kitten.jpg";
+    public static final String GROUP_FOR_CONTACT_CREATION = "group_for_contactCreation";
 
     public void createContact(ContactData contact) {
         openMainPage();
@@ -47,7 +48,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("email2"), contact.email2());
         type(By.name("email3"), contact.email3());
         type(By.name("homepage"), contact.homepage());
+        selectGroup(By.name("new_group"), GROUP_FOR_CONTACT_CREATION);
     }
+
+
 
     public void openMainPage() {
         if (!manager.isElementPresent(By.linkText("home"))) {
