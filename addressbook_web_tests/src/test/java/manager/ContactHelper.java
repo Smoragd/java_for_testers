@@ -1,10 +1,7 @@
 package manager;
 
 import model.ContactData;
-import model.GroupData;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 
 public class ContactHelper extends HelperBase {
