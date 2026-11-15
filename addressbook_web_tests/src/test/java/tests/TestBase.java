@@ -3,6 +3,8 @@ package tests;
 import manager.ApplicationManager;
 import org.junit.jupiter.api.BeforeAll;
 
+import java.util.Random;
+
 public class TestBase {
 
     protected static ApplicationManager app;
@@ -14,6 +16,18 @@ public class TestBase {
             app = new ApplicationManager();
         }
         app.init(System.getProperty("browser","firefox")); // browser options: firefox, chrome, edge
+    }
+
+    public static String randomString(int n){
+        var rnd = new Random();
+        var result = "";
+        for (int i = 0; i < n; i++) {
+            result = result + (char)('a' + rnd.nextInt(26));
+            //rnd.nextInt(27) - случайное число от 0 до 25;
+            // ('a' + rnd.nextInt(26)) - номером символа от 97('a'+0) до 122('a'+25);
+            // (char)('a' + rnd.nextInt(26)) - предобразование номера символа в сам символ под этим номером
+        }
+        return result;
     }
 
     /*   @AfterEach

@@ -24,13 +24,14 @@ public record ContactData(String firstname,
 
     public ContactData() {
         this("", "", "", "", "", "","",
-                "", "", "", "", "", "", "", "", "","","","","","");
+                "", "", "", "", "", "", "",
+                "", "","","","","","");
     }
 
     public ContactData withFirstname(String firstname) {
         return new ContactData(firstname, this.middlename, this.lastname, this.nickname, this.photo, this.title, this.company,
-                this.address, this.homePhone, this.mobilePhone, this.workPhone, this.email, this.email2, this.email3, this.homepage,
-                this.bday,this.bmonth,this.byear,this.aday,this.amonth,this.ayear);
+                this.address, this.homePhone, this.mobilePhone, this.workPhone, this.email, this.email2, this.email3,
+                this.bday,this.bmonth,this.byear,this.aday,this.amonth,this.ayear, this.homepage);
     }
 
 }
