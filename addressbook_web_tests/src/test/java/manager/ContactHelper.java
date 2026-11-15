@@ -3,6 +3,9 @@ package manager;
 import model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import java.time.Year;
+import java.util.List;
+import java.util.Random;
 
 public class ContactHelper extends HelperBase {
 
@@ -12,6 +15,10 @@ public class ContactHelper extends HelperBase {
 
     public static final String PHOTO_LINK = "C:\\Users\\Admin\\Downloads\\Kitten.jpg";
     public static final String GROUP_FOR_CONTACT_CREATION = "group_for_contactCreation";
+    public static final List<String> MONTHS = List.of(
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+    );
 
     public void createContact(ContactData contact) {
         openMainPage();
@@ -26,7 +33,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void openMainPage() {
-        if (!manager.isElementPresent(By.linkText("home"))) {
+        if (!manager.driver.getCurrentUrl().contains("index.php")) {
             click(By.linkText("home"));
         }
     }
@@ -61,7 +68,9 @@ public class ContactHelper extends HelperBase {
         selectDateAndMonth(By.name("aday"), contact.aday());
         selectDateAndMonth(By.name("amonth"), contact.amonth());
         type(By.name("ayear"), contact.ayear());
-        selectGroup(By.name("new_group"), GROUP_FOR_CONTACT_CREATION);
+        if (contact.group() != null && !contact.group().isEmpty()) {
+            selectContactGroup(By.name("new_group"), contact.group());
+        }
 
     }
 
@@ -71,7 +80,7 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    protected void selectGroup(By locator, String groupName) {
+    protected void selectContactGroup(By locator, String groupName) {
         WebElement select = manager.driver.findElement(locator);
         select.click();
         select.findElement(By.xpath(".//option[. = '" + groupName + "']")).click();
@@ -89,7 +98,7 @@ public class ContactHelper extends HelperBase {
     public void removeContact() {
         openMainPage();
         selectContact();
-        removeSelectedContact();
+        removeSelectedContacts();
         //manager.driver.switchTo().alert().accept(); - диалоговое окно (alert) при удалении контакта не появляется
         returnToMainPage();
     }
@@ -103,9 +112,49 @@ public class ContactHelper extends HelperBase {
         click(By.name("selected[]"));
     }
 
-    private void removeSelectedContact() {
+    private void removeSelectedContacts() {
         click(By.name("delete"));
     }
 
+    public int getContactsCount() {
+        openMainPage();
+        return manager.driver.findElements(By.name("selected[]")).size();
+    }
 
+    public void removeAllContacts() {
+        openMainPage();
+        selectAllContacts();
+        removeSelectedContacts();
+    }
+
+    private void selectAllContacts() {
+        var checkboxes = manager.driver.findElements(By.name("selected[]"));
+        for (var checkbox : checkboxes) {
+            checkbox.click();
+        }
+    }
+
+    public static String randomDay() {
+        var rnd = new Random();
+        int day = 1 + rnd.nextInt(28);
+        return String.valueOf(day);
+    }
+
+    public static String randomMonth() {
+        var rnd = new Random();
+        return MONTHS.get(rnd.nextInt(MONTHS.size()));
+    }
+
+    public static String randomYear() {
+        var rnd = new Random();
+        int currentYear = Year.now().getValue();
+        int year = 1901 + rnd.nextInt(currentYear - 1901);  // 1901 … currentYear-1
+        return String.valueOf(year);
+    }
+
+    public static String randomPhone() {
+        var rnd = new Random();
+        String number = String.valueOf(1000000000L + rnd.nextInt(900000000));
+        return "+7" + number;
+    }
 }

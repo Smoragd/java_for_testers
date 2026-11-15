@@ -30,6 +30,12 @@ public class TestBase {
         return result;
     }
 
+    /*      // метод выбирает из списка значений любого типа, в него передается список
+            public static <T> T randomFromList(List<T> values) {
+            var rnd = new Random();
+            return values.get(rnd.nextInt(values.size()));
+        }*/
+
     /*   @AfterEach
     public void tearDown() {
         driver.findElement(By.linkText("Logout")).click();
