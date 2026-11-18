@@ -14,7 +14,7 @@ public class ContactCreationTests extends TestBase {
 
     @BeforeAll
     public static void createGroupForContacts() {
-        app.groups().createGroup(new GroupData(GROUP_FOR_CONTACT_CREATION, "header", "footer"));
+        app.groups().createGroup(new GroupData("", GROUP_FOR_CONTACT_CREATION, "header", "footer"));
     }
 
     @ParameterizedTest
