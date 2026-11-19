@@ -1,6 +1,7 @@
 package model;
 
-public record ContactData(String firstname,
+public record ContactData(String id,
+                          String firstname,
                           String middlename,
                           String lastname,
                           String nickname,
@@ -24,15 +25,42 @@ public record ContactData(String firstname,
                           String group) {
 
     public ContactData() {
-        this("", "", "", "", "", "","",
+        this("","", "", "", "", "", "","",
                 "", "", "", "", "", "", "",
                 "", "","","","","","","");
     }
 
-    public ContactData withFirstname(String firstname) {
-        return new ContactData(firstname, this.middlename, this.lastname, this.nickname, this.photo, this.title, this.company,
+    public ContactData withId(String id) {
+        return new ContactData(id, this.firstname, this.middlename, this.lastname, this.nickname, this.photo, this.title, this.company,
                 this.address, this.homePhone, this.mobilePhone, this.workPhone, this.email, this.email2, this.email3, this.homepage,
                 this.bday,this.bmonth,this.byear,this.aday,this.amonth,this.ayear, this.group);
     }
+
+    public ContactData withFirstname(String firstname) {
+        return new ContactData(this.id, firstname, this.middlename, this.lastname, this.nickname, this.photo, this.title, this.company,
+                this.address, this.homePhone, this.mobilePhone, this.workPhone, this.email, this.email2, this.email3, this.homepage,
+                this.bday,this.bmonth,this.byear,this.aday,this.amonth,this.ayear, this.group);
+    }
+
+    public ContactData withMiddlename(String middlename) {
+        return new ContactData(this.id, this.firstname, middlename, this.lastname, this.nickname, this.photo, this.title, this.company,
+                this.address, this.homePhone, this.mobilePhone, this.workPhone, this.email, this.email2, this.email3, this.homepage,
+                this.bday,this.bmonth,this.byear,this.aday,this.amonth,this.ayear, this.group);
+    }
+
+    public ContactData withLastname(String lastname) {
+        return new ContactData(this.id, this.firstname, this.middlename, lastname, this.nickname, this.photo, this.title, this.company,
+                this.address, this.homePhone, this.mobilePhone, this.workPhone, this.email, this.email2, this.email3, this.homepage,
+                this.bday,this.bmonth,this.byear,this.aday,this.amonth,this.ayear, this.group);
+    }
+
+    public ContactData withEmptyFieldsExceptIdFirstnameLastname() {
+        return new ContactData(
+                this.id,this.firstname, "", this.lastname, "", "", "", "",
+                "", "", "", "", "", "", "",
+                "", "", "", "", "", "", "", ""
+        );
+    }
+
 
 }

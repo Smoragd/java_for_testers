@@ -1,9 +1,11 @@
 package manager;
 
 import model.ContactData;
+import model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -95,11 +97,20 @@ public class ContactHelper extends HelperBase {
         select.findElement(By.xpath(".//option[. = '" + value + "']")).click();
     }
 
-    public void removeContact() {
+    public void removeContact(ContactData contact) {
         openMainPage();
-        selectContact();
+        selectContact(contact);
         removeSelectedContacts();
         //manager.driver.switchTo().alert().accept(); - диалоговое окно (alert) при удалении контакта не появляется
+        returnToMainPage();
+    }
+
+    public void modifyContact(ContactData contact, ContactData modifiedContact) {
+        openMainPage();
+        selectContact(contact);
+        //initContactModification();
+        fillContactForm(modifiedContact);
+        //submitContactModification();
         returnToMainPage();
     }
 
@@ -108,8 +119,15 @@ public class ContactHelper extends HelperBase {
         return manager.isElementPresent(By.name("selected[]"));
     }
 
-    private void selectContact() {
-        click(By.name("selected[]"));
+    private void selectContact(ContactData contact) {
+        click(By.cssSelector(String.format("input[value='%s']", contact.id())));
+    }
+
+    private void selectAllContacts() {
+        var checkboxes = manager.driver.findElements(By.name("selected[]"));
+        for (var checkbox : checkboxes) {
+            checkbox.click();
+        }
     }
 
     private void removeSelectedContacts() {
@@ -127,11 +145,19 @@ public class ContactHelper extends HelperBase {
         removeSelectedContacts();
     }
 
-    private void selectAllContacts() {
-        var checkboxes = manager.driver.findElements(By.name("selected[]"));
-        for (var checkbox : checkboxes) {
-            checkbox.click();
+    public List<ContactData> getList() {
+        openMainPage();
+        var contacts = new ArrayList<ContactData>();
+        //ищем целые строки контактов - и потом элементы ищем внутри каждой строки, а не по всему дереву
+        var rows = manager.driver.findElements(By.cssSelector("tr[name=entry]"));
+        for (var row : rows) {
+            var lastname  = row.findElement(By.cssSelector("td:nth-child(2)")).getText();
+            var firstname = row.findElement(By.cssSelector("td:nth-child(3)")).getText();
+            var checkbox = row.findElement(By.name("selected[]"));
+            var id = checkbox.getAttribute("value");
+            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
+        return contacts;
     }
 
     public static String randomDay() {

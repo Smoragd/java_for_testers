@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import static manager.ContactHelper.*;
 
@@ -20,10 +21,25 @@ public class ContactCreationTests extends TestBase {
     @ParameterizedTest
     @MethodSource("contactProvider")
     public void canCreateMultipleContacts(ContactData contact) {
-        int contactCount = app.contacts().getContactsCount();
+        var oldContacts = app.contacts().getList();
         app.contacts().createContact(contact);
-        int newContactCount = app.contacts().getContactsCount();
-        Assertions.assertEquals(contactCount+1, newContactCount);
+
+        var newContacts = app.contacts().getList();
+
+        //compareById — компаратор, который упорядочивает контакты по возрастанию id (от меньшего id  к бОльшему)
+        Comparator<ContactData> compareById = (o1, o2) -> {
+            return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
+        };
+        //сортируем элементы списка, передаем в sort() функцию-компаратор
+        newContacts.sort(compareById);
+
+        var expectedList = new ArrayList<>(oldContacts);
+        //созданный контакт в expectedList будет иметь id - как у последнего элемента newContacts
+        //при этом все поля, кроме id+ФИ, делаем "", чтобы они не участвовали в сравнении (не указать мы их не можем)
+        expectedList.add(contact.withId(newContacts.get(newContacts.size()-1).id()).withEmptyFieldsExceptIdFirstnameLastname());
+        expectedList.sort(compareById);
+
+        Assertions.assertEquals(expectedList, newContacts);
     }
 
     public static List<ContactData> contactProvider() {
@@ -37,7 +53,8 @@ public class ContactCreationTests extends TestBase {
                     for (var datesFilled : List.of(false, true)) {
                         for (var groupFilled : List.of(false, true)) {
                             result.add(new ContactData(
-                                    // 1. ФИО + никнейм
+                                    // 1. id + ФИО + никнейм
+                                    fioNickFilled ? "Тест" : "",
                                     fioNickFilled ? "Тест" : "",
                                     fioNickFilled ? "Тестович" : "",
                                     fioNickFilled ? "Тестов" : "",
@@ -73,7 +90,7 @@ public class ContactCreationTests extends TestBase {
 
         //2.) варианты с генератором рандомных значений
         for (int i = 0; i < 5; i++) {
-            result.add(new ContactData(randomString(i+10),randomString(i+10),randomString(i+10),
+            result.add(new ContactData("", randomString(i+10),randomString(i+10),randomString(i+10),
                     randomString(i+10),PHOTO_LINK,randomString(i+10),
                     randomString(i+10),randomString(i+10),randomPhone(),
                     randomPhone(),randomPhone(),randomString(i+10),
