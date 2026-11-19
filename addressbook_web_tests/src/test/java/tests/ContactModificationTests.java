@@ -3,7 +3,6 @@ package tests;
 import model.ContactData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
