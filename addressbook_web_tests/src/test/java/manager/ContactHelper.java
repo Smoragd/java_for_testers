@@ -107,11 +107,19 @@ public class ContactHelper extends HelperBase {
 
     public void modifyContact(ContactData contact, ContactData modifiedContact) {
         openMainPage();
-        selectContact(contact);
-        //initContactModification();
+        initContactModification(contact);
         fillContactForm(modifiedContact);
-        //submitContactModification();
+        submitContactModification();
         returnToMainPage();
+    }
+
+    private void initContactModification(ContactData contact) {
+        // Ищем ссылку, в адресе (href) которой есть edit.php?id=<ID контакта>
+        click(By.cssSelector(String.format("a[href='edit.php?id=%s']", contact.id())));
+    }
+
+    private void submitContactModification() {
+        click(By.name("update"));
     }
 
     public boolean isContactPresent() {
