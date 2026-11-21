@@ -1,3 +1,7 @@
+import org.w3c.dom.ls.LSOutput;
+
+import java.io.File;
+
 public class HelloWorld {
     public static void main(String[] args) {
         //механизм ветвления if - else:
@@ -24,12 +28,14 @@ public class HelloWorld {
             //1. System.out.println(exception.getMessage()); --вывод краткого текста ошибки из лога
         }
 */
-/*
-            //Выводит путь до файла, проверает, есть ли файл по этому пути
-            var configFile = new File("sandbox/build.gradle");
-            System.out.println(configFile.getAbsolutePath());
-            System.out.println(configFile.exists());
- */
+
+        //Выводит путь до файла, проверает, есть ли файл по этому пути
+        var configFile = new File("sandbox/build.gradle");
+        System.out.println(configFile.getAbsolutePath());
+        System.out.println(configFile.exists());
+
+        //вывод абсолютного пути к папке с проектом (текущей директории)
+        System.out.println(new File("").getAbsolutePath());
     }
 
     private static int devide(int x, int y) {

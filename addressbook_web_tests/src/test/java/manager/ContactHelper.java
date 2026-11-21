@@ -3,6 +3,8 @@ package manager;
 import model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.nio.file.Paths;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ public class ContactHelper extends HelperBase {
         super(manager);
     }
 
-    public static final String PHOTO_LINK = "C:\\Users\\Admin\\Downloads\\Kitten.jpg";
+    public static final String PHOTO_LINK = "src/test/resources/images/Kitten.jpg"; //относительный путь
     public static final String GROUP_FOR_CONTACT_CREATION = "group_for_contactCreation";
     public static final List<String> MONTHS = List.of(
             "January", "February", "March", "April", "May", "June",
@@ -52,7 +54,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("middlename"), contact.middlename());
         type(By.name("lastname"), contact.lastname());
         type(By.name("nickname"), contact.nickname());
-        addPhoto(By.name("photo"), contact.photo());
+        attach(By.name("photo"), contact.photo());
         type(By.name("title"), contact.title());
         type(By.name("company"), contact.company());
         type(By.name("address"), contact.address());
@@ -75,11 +77,24 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    private void addPhoto(By locator, String photoLink) {
-        if (photoLink != null && !photoLink.isEmpty()) {
-            manager.driver.findElement(locator).sendKeys(photoLink);
+    //Paths.get(file) - превращает строку пути из константы в объект Path;
+    //toAbsolutePath() - относительный путь превращает в абсолютный;
+    //toString() - путь превращает обратно в строку
+    private void attach(By locator, String file) {
+        if (file != null && !file.isEmpty()) {
+            manager.driver.findElement(locator).sendKeys(Paths.get(file).toAbsolutePath().toString());
         }
     }
+
+/*  //второй вариант attach():
+    private void attach(By locator, String resourceName) {
+        if (resourceName != null && !resourceName.isEmpty()) {
+            String path = getClass().getClassLoader()
+                    .getResource(resourceName)
+                    .getPath();
+            manager.driver.findElement(locator).sendKeys(path);
+        }
+    }*/
 
     protected void selectContactGroup(By locator, String groupName) {
         WebElement select = manager.driver.findElement(locator);

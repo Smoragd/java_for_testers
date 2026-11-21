@@ -4,6 +4,7 @@ import model.ContactData;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
@@ -41,6 +42,16 @@ public class ContactCreationTests extends TestBase {
 
         Assertions.assertEquals(expectedList, newContacts);
     }
+
+    @Test
+    public void canCreateContact() {
+        var contact = new ContactData()
+                .withFirstname("firstname")
+                .withLastname("lastname")
+                .withPhoto(PHOTO_LINK);
+        app.contacts().createContact(contact);
+    }
+
 
     public static List<ContactData> contactProvider() {
         var result = new ArrayList<ContactData>();

@@ -54,6 +54,12 @@ public record ContactData(String id,
                 this.bday,this.bmonth,this.byear,this.aday,this.amonth,this.ayear, this.group);
     }
 
+    public ContactData withPhoto(String photo) {
+        return new ContactData(this.id, this.firstname, this.middlename, this.lastname, this.nickname, photo, this.title, this.company,
+                this.address, this.homePhone, this.mobilePhone, this.workPhone, this.email, this.email2, this.email3, this.homepage,
+                this.bday,this.bmonth,this.byear,this.aday,this.amonth,this.ayear, this.group);
+    }
+
     public ContactData withEmptyFieldsExceptIdFirstnameLastname() {
         return new ContactData(
                 this.id,this.firstname, "", this.lastname, "", "", "", "",
