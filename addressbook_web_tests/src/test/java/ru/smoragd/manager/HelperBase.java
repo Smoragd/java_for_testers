@@ -1,4 +1,4 @@
-package manager;
+package ru.smoragd.manager;
 
 import org.openqa.selenium.By;
 

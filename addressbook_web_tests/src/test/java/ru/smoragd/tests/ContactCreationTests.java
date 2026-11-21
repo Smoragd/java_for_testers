@@ -1,7 +1,7 @@
-package tests;
+package ru.smoragd.tests;
 
-import model.ContactData;
-import model.GroupData;
+import ru.smoragd.model.ContactData;
+import ru.smoragd.model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import static manager.ContactHelper.*;
+import static ru.smoragd.manager.ContactHelper.*;
 
 public class ContactCreationTests extends TestBase {
 
@@ -45,16 +45,18 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void canCreateContact() {
+        var photoLink = randomFile("src/test/resources/images");
         var contact = new ContactData()
                 .withFirstname("firstname")
                 .withLastname("lastname")
-                .withPhoto(PHOTO_LINK);
+                .withPhoto(photoLink);
         app.contacts().createContact(contact);
     }
 
 
     public static List<ContactData> contactProvider() {
         var result = new ArrayList<ContactData>();
+        var photoLink = randomFile("src/test/resources/images");
 
         //1.) варианты "не заполнено - заполнено" для ГРУПП параметров,
         // тк если перебирать для каждого отдельного параметра, то будет больше 2млн тестов
@@ -71,7 +73,7 @@ public class ContactCreationTests extends TestBase {
                                     fioNickFilled ? "Тестов" : "",
                                     fioNickFilled ? "Test_nick" : "",
                                     // 2. фото
-                                    photoFilled ? PHOTO_LINK : "",
+                                    photoFilled ? photoLink : "",
                                     // 3. должность + компания + адрес + homepage + телефоны + email'ы
                                     contactInfoFilled ? "Должность" : "",
                                     contactInfoFilled ? "Компания" : "",
@@ -102,7 +104,7 @@ public class ContactCreationTests extends TestBase {
         //2.) варианты с генератором рандомных значений
         for (int i = 0; i < 5; i++) {
             result.add(new ContactData("", randomString(i+10),randomString(i+10),randomString(i+10),
-                    randomString(i+10),PHOTO_LINK,randomString(i+10),
+                    randomString(i+10),photoLink,randomString(i+10),
                     randomString(i+10),randomString(i+10),randomPhone(),
                     randomPhone(),randomPhone(),randomString(i+10),
                     randomString(i+10),randomString(i+10),randomString(i+10),

@@ -1,7 +1,10 @@
-package tests;
+package ru.smoragd.tests;
 
-import manager.ApplicationManager;
+import ru.smoragd.manager.ApplicationManager;
 import org.junit.jupiter.api.BeforeAll;
+
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.Random;
 
 public class TestBase {
@@ -27,6 +30,14 @@ public class TestBase {
             // (char)('a' + rnd.nextInt(26)) - предобразование номера символа в сам символ под этим номером
         }
         return result;
+    }
+
+    //возвращает относительный путь к рандомному файлу в указанной папке
+    public static String randomFile(String dir){
+        var fileNames = new File(dir).list();
+        var rnd = new Random();
+        var index = rnd.nextInt(fileNames.length);
+        return Paths.get(dir, fileNames[index]).toString();
     }
 
     /*      // метод выбирает из списка значений любого типа, в него передается список

@@ -1,6 +1,6 @@
-package tests;
+package ru.smoragd.tests;
 
-import model.ContactData;
+import ru.smoragd.model.ContactData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

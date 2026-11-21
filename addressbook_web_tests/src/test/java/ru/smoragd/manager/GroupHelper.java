@@ -1,6 +1,6 @@
-package manager;
+package ru.smoragd.manager;
 
-import model.GroupData;
+import ru.smoragd.model.GroupData;
 import org.openqa.selenium.By;
 import java.util.ArrayList;
 import java.util.List;

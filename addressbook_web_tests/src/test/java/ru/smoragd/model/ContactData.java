@@ -1,4 +1,4 @@
-package model;
+package ru.smoragd.model;
 
 public record ContactData(String id,
                           String firstname,

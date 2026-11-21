@@ -1,9 +1,8 @@
-package manager;
+package ru.smoragd.manager;
 
-import model.ContactData;
+import ru.smoragd.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import java.nio.file.Paths;
 import java.time.Year;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ public class ContactHelper extends HelperBase {
         super(manager);
     }
 
-    public static final String PHOTO_LINK = "src/test/resources/images/Kitten.jpg"; //относительный путь
     public static final String GROUP_FOR_CONTACT_CREATION = "group_for_contactCreation";
     public static final List<String> MONTHS = List.of(
             "January", "February", "March", "April", "May", "June",
@@ -85,16 +83,6 @@ public class ContactHelper extends HelperBase {
             manager.driver.findElement(locator).sendKeys(Paths.get(file).toAbsolutePath().toString());
         }
     }
-
-/*  //второй вариант attach():
-    private void attach(By locator, String resourceName) {
-        if (resourceName != null && !resourceName.isEmpty()) {
-            String path = getClass().getClassLoader()
-                    .getResource(resourceName)
-                    .getPath();
-            manager.driver.findElement(locator).sendKeys(path);
-        }
-    }*/
 
     protected void selectContactGroup(By locator, String groupName) {
         WebElement select = manager.driver.findElement(locator);
