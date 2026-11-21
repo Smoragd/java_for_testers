@@ -20,18 +20,6 @@ public class TestBase {
         app.init(System.getProperty("browser","firefox")); // browser options: firefox, chrome, edge
     }
 
-    public static String randomString(int n){
-        var rnd = new Random();
-        var result = "";
-        for (int i = 0; i < n; i++) {
-            result = result + (char)('a' + rnd.nextInt(26));
-            //rnd.nextInt(27) - случайное число от 0 до 25;
-            // ('a' + rnd.nextInt(26)) - номер символа от 97('a'+0) до 122('a'+25);
-            // (char)('a' + rnd.nextInt(26)) - предобразование номера символа в сам символ под этим номером
-        }
-        return result;
-    }
-
     //возвращает относительный путь к рандомному файлу в указанной папке
     public static String randomFile(String dir){
         var fileNames = new File(dir).list();

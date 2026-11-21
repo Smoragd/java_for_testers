@@ -1,5 +1,6 @@
 package ru.smoragd.tests;
 
+import ru.smoragd.common.CommonFunctions;
 import ru.smoragd.model.ContactData;
 import ru.smoragd.model.GroupData;
 import org.junit.jupiter.api.Assertions;
@@ -103,11 +104,11 @@ public class ContactCreationTests extends TestBase {
 
         //2.) варианты с генератором рандомных значений
         for (int i = 0; i < 5; i++) {
-            result.add(new ContactData("", randomString(i+10),randomString(i+10),randomString(i+10),
-                    randomString(i+10),photoLink,randomString(i+10),
-                    randomString(i+10),randomString(i+10),randomPhone(),
-                    randomPhone(),randomPhone(),randomString(i+10),
-                    randomString(i+10),randomString(i+10),randomString(i+10),
+            result.add(new ContactData("", CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10),
+                    CommonFunctions.randomString(i+10),photoLink, CommonFunctions.randomString(i+10),
+                    CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10),randomPhone(),
+                    randomPhone(),randomPhone(), CommonFunctions.randomString(i+10),
+                    CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10),
                     randomDay(),randomMonth(),randomYear(),
                     randomDay(),randomMonth(),randomYear(),GROUP_FOR_CONTACT_CREATION));
         }

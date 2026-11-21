@@ -1,9 +1,15 @@
 package ru.smoragd.tests;
 
+import ru.smoragd.common.CommonFunctions;
 import ru.smoragd.model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -19,12 +25,20 @@ public class GroupCreationTests extends TestBase {
                 }
             }
         }
-        for (int i = 0; i < 5; i++) {
+ /*       for (int i = 0; i < 5; i++) {
             result.add(new GroupData()
-                    .withName(randomString(i+10))
-                    .withHeader(randomString(i+10))
-                    .withFooter(randomString(i+10)));
-        }
+                    .withName(CommonFunctions.randomString(i+10))
+                    .withHeader(CommonFunctions.randomString(i+10))
+                    .withFooter(CommonFunctions.randomString(i+10)));
+        }*/
+        //Используем данные, сгенерированные и прочитанные из файла.
+        //.getResourceAsStream("groups.json") ищет файл в classpath, а не в рабочей директории, как File("groups.json")
+        //Файл должен лежать в src/test/resources (Gradle копирует в classpath)
+        ObjectMapper mapper = new ObjectMapper();
+        var inputStream = GroupCreationTests.class.getClassLoader()
+                .getResourceAsStream("groups.json");
+        var value = mapper.readValue(inputStream, new TypeReference<List<GroupData>>(){});
+        result.addAll(value);
         return result;
     }
 
