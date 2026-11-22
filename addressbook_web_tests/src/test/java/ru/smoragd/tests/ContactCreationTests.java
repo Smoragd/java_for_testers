@@ -103,7 +103,7 @@ public class ContactCreationTests extends TestBase {
         }
 
         //2.) варианты с генератором рандомных значений
-        for (int i = 0; i < 5; i++) {
+/*Старый провайдер (без чтения из файла):        for (int i = 0; i < 5; i++) {
             result.add(new ContactData("", CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10),
                     CommonFunctions.randomString(i+10),photoLink, CommonFunctions.randomString(i+10),
                     CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10),randomPhone(),
@@ -111,9 +111,9 @@ public class ContactCreationTests extends TestBase {
                     CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10),
                     randomDay(),randomMonth(),randomYear(),
                     randomDay(),randomMonth(),randomYear(),GROUP_FOR_CONTACT_CREATION));
-        }
+        }*/
 
-        return result;
+
     }
 
 /*    @Test
