@@ -12,16 +12,11 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import ru.smoragd.common.CommonFunctions;
 import ru.smoragd.model.ContactData;
 import ru.smoragd.model.GroupData;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static ru.smoragd.common.CommonFunctions.randomString;
 import static ru.smoragd.manager.ContactHelper.*;
-import static ru.smoragd.manager.ContactHelper.GROUP_FOR_CONTACT_CREATION;
-import static ru.smoragd.tests.TestBase.randomFile;
 
 public class Generator {
 
@@ -77,10 +72,9 @@ public class Generator {
 
     private Object generateContacts() {
         var result = new ArrayList<ContactData>();
-        var photoLink = randomFile("src/test/resources/images");
         for (int i = 0; i < count; i++) {
             result.add(new ContactData("", CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10),
-                    CommonFunctions.randomString(i+10), photoLink, CommonFunctions.randomString(i+10),
+                    CommonFunctions.randomString(i+10), photoLink(), CommonFunctions.randomString(i+10),
                     CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10),randomPhone(),
                     randomPhone(),randomPhone(), CommonFunctions.randomString(i+10),
                     CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10), CommonFunctions.randomString(i+10),
@@ -111,7 +105,7 @@ public class Generator {
             //File(output)-куда пишем, data - что пишем (сгенерированные данные)
             //mapper.writeValue(new File(output), data);
 
-        } if ("yaml".equals(format)) {
+        } else if ("yaml".equals(format)) {
             var mapper = new YAMLMapper();
             mapper.writeValue(new File(output), data);
         } else if ("xml".equals(format)) {

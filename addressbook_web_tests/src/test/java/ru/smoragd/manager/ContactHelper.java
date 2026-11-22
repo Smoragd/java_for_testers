@@ -1,13 +1,15 @@
 package ru.smoragd.manager;
 
-import ru.smoragd.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ru.smoragd.model.ContactData;
 import java.nio.file.Paths;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static ru.smoragd.tests.TestBase.randomFileInResources;
 
 public class ContactHelper extends HelperBase {
 
@@ -15,6 +17,9 @@ public class ContactHelper extends HelperBase {
         super(manager);
     }
 
+    public static String photoLink() {
+        return randomFileInResources("images");
+    }
     public static final String GROUP_FOR_CONTACT_CREATION = "group_for_contactCreation";
     public static final List<String> MONTHS = List.of(
             "January", "February", "March", "April", "May", "June",

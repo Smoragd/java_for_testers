@@ -1,5 +1,7 @@
 package ru.smoragd.tests;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.smoragd.common.CommonFunctions;
 import ru.smoragd.model.ContactData;
 import ru.smoragd.model.GroupData;
@@ -8,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -46,21 +49,18 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void canCreateContact() {
-        var photoLink = randomFile("src/test/resources/images");
         var contact = new ContactData()
                 .withFirstname("firstname")
                 .withLastname("lastname")
-                .withPhoto(photoLink);
+                .withPhoto(photoLink());
         app.contacts().createContact(contact);
     }
 
 
-    public static List<ContactData> contactProvider() {
+    public static List<ContactData> contactProvider() throws IOException {
         var result = new ArrayList<ContactData>();
-        var photoLink = randomFile("src/test/resources/images");
 
-        //1.) варианты "не заполнено - заполнено" для ГРУПП параметров,
-        // тк если перебирать для каждого отдельного параметра, то будет больше 2млн тестов
+        //1.) варианты "не заполнено - заполнено" для ГРУПП параметров
         for (var fioNickFilled : List.of(false, true)) {
             for (var photoFilled : List.of(false, true)) {
                 for (var contactInfoFilled : List.of(false, true)) {
@@ -74,7 +74,7 @@ public class ContactCreationTests extends TestBase {
                                     fioNickFilled ? "Тестов" : "",
                                     fioNickFilled ? "Test_nick" : "",
                                     // 2. фото
-                                    photoFilled ? photoLink : "",
+                                    photoFilled ? photoLink() : "",
                                     // 3. должность + компания + адрес + homepage + телефоны + email'ы
                                     contactInfoFilled ? "Должность" : "",
                                     contactInfoFilled ? "Компания" : "",
@@ -113,25 +113,14 @@ public class ContactCreationTests extends TestBase {
                     randomDay(),randomMonth(),randomYear(),GROUP_FOR_CONTACT_CREATION));
         }*/
 
+        //код для JSON
+        var inputStream = ContactCreationTests.class.getClassLoader()
+                .getResourceAsStream("contacts.json");
+        var mapper = new ObjectMapper();
 
+        var value = mapper.readValue(inputStream, new TypeReference<List<ContactData>>(){});
+        result.addAll(value);
+        return result;
     }
-
-/*    @Test
-    public void canCreateEmptyContact() {
-        app.contacts().createContact(new ContactData());
-    }
-
-    @Test
-    public void canCreateContactWithFirstnameOnly() {
-        app.contacts().createContact(new ContactData().withFirstname("Петров"));
-    }
-
-    @Test
-    public void canCreateFullContact() {
-        app.contacts().createContact(new ContactData("Тест", "Тестович", "Тестов",
-                "Test_nick", PHOTO_LINK, "Должность", "Компания", "Адрес", "000111_дом",
-                "222333_мобильный", "444555_рабочий", "email", "email2", "email3", "homepage.ru",
-                "26","December","2012","25","November","2021", GROUP_FOR_CONTACT_CREATION));
-    }*/
 
 }
