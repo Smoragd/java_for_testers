@@ -26,4 +26,9 @@ test {
     if (project.hasProperty("browser")){
         systemProperty("browser", project.property("browser"))
     } // + прописать в конфигурации запуска  -Pbrowser=chrome
+    if (project.hasProperty("target")){
+        systemProperty("target", project.property("target"))
+    } // + прописать в конфигурации запуска  -Ptarget=local
+    //-Ptarget= может быть любым: local, ci, staging, prod — в зависимости от того, как код (TestBase или ApplicationManager)
+    // использует это свойство.
 }
